@@ -1,11 +1,23 @@
 package attendance.common.constant;
 
 public enum OutputMessage {
-    CHECK_MEMBERSHIP("멤버십 할인을 받으시겠습니까? (Y/N)"),
-    CHECK_OTHER_PURCHASE("감사합니다. 구매하고 싶은 다른 상품이 있나요? (Y/N)"), // 자동 줄바꿈
+    WRITE_NAME("닉네임을 입력해 주세요."),
+    WRITE_TIME("등교 시간을 입력해 주세요."),
+    MODIFY_NAME("출석을 수정하려는 크루의 닉네임을 입력해 주세요."),
+    MODIFY_TIME("수정하려는 날짜(일)를 입력해 주세요."),
+    MODIFY_TO_WHEN("언제로 변경하겠습니까?"),
 
-    STOCK_INFO("- %s %,d원 %s개 %s"), // 줄바꿈 요구 %s 는 문자열 주입, %,d 는 n_nnn 형식 숫자 주입( 2,000)
-    STOCK_SOLD_OUT_INFO("- %s %,d원 재고 없음"),
+    OPENING_MESSAGE("오늘은 %s입니다. 기능을 선택해 주세요.\n"
+        + "1. 출석 확인\n"
+        + "2. 출석 수정\n"
+        + "3. 크루별 출석 기록 확인\n"
+        + "4. 제적 위험자 확인\n"
+        + "Q. 종료\n"),
+    TODAY_NOT_OPERATING_HOUR("%d월 %d일 %s요일은 등교일이 아닙니다."),
+
+    SHOW_ATTENDANCE("%d월 %d일 %s요일 %d (출석)"),
+    MODIFY_SUCCESS("%d월 %d일 %s요일 %s (%s) -> %s (%s) 수정 완료!"),
+    SHOW_ATTENDANCE_LIST("이번 달 %s의 출석 기록입니다."),
     ;
     private final String message;
 

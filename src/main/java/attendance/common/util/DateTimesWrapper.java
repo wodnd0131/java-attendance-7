@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import camp.nextstep.edu.missionutils.DateTimes;
 
 public final class DateTimesWrapper {
-    private static final String DATE_PATTERN = "yyyy-MM-dd";
+    private static final String DATE_PATTERN = "MM월 dd일 E요일";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
     private DateTimesWrapper() {

@@ -41,4 +41,12 @@ public final class InputValidator {
             throw new IllegalArgumentException(INVALID_OUT_OF_INT_RANGE.getMessage());
         }
     }
+
+    public static void validateInputRange(String input) {
+        int i = Integer.parseInt(input);
+        if (i < 1 || i >= 5) {
+            throw new IllegalArgumentException(INVALID_OUT_OF_INT_RANGE.getMessage());
+        }
+    }
+
 }
