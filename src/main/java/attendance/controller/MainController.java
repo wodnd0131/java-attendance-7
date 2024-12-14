@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import attendance.common.constant.OutputMessage;
@@ -36,8 +38,14 @@ public class MainController {
     }
 
     public void run() {
-        int input = getIntroduceInput();
-        introduceHandler(input);
+        while (true) {
+            int input = getIntroduceInput();
+            if (input == 5) {
+                break;
+            }
+            introduceHandler(input);
+        }
+
     }
 
     private int getIntroduceInput() {
@@ -68,14 +76,14 @@ public class MainController {
     }
 
     private void attend() {
-        // isHoliday();
+        isHoliday();
         isName(OutputMessage.WRITE_NAME);
         LocalTime time = isTime();
         outputView.println(OutputMessage.SHOW_ATTENDANCE_RESULT, today, time.toString(), "출석");
         //ToDo. 운영 시간 검증
     }
 
-    private String modify() {
+    private void modify() {
         String name = isName(OutputMessage.MODIFY_NAME);
         String day = isDay();
         LocalTime time = isTime();
@@ -94,17 +102,15 @@ public class MainController {
                 , time.toString()
                 , checkLateness(time));
             outputView.println(result);
-            return result;
+            return;
         }
         String result = String.format(OutputMessage.MODIFY_SUCCESS.getMessage(),
             dateToString(target)
             , "--:--"
             , "(결석)"
-            , time.toString()
+            , time
             , checkLateness(time));
         outputView.println(result);
-        return result;
-
     }
 
     private void confirmRecord() {
