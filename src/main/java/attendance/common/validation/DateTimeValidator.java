@@ -23,8 +23,7 @@ public final class DateTimeValidator {
     }
 
     public static String checkLateness(LocalTime time) {
-
-        LocalTime startTime = LocalTime.of(9, 59, 59, 0);
+        LocalTime startTime = LocalTime.of(7, 59, 59, 0);
         LocalTime lateness = LocalTime.of(10, 4, 59, 0);
         LocalTime absence = LocalTime.of(10, 29, 59, 0);
         if (time.isAfter(startTime) && time.isBefore(lateness)) {

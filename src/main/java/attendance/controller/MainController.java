@@ -80,7 +80,7 @@ public class MainController {
         isHoliday(today);
         isName(OutputMessage.WRITE_NAME);
         LocalTime time = isTime();
-        outputView.println(OutputMessage.SHOW_ATTENDANCE_RESULT, today, time.toString(), "출석");
+        outputView.println(OutputMessage.SHOW_ATTENDANCE_RESULT, today, time.toString(), checkLateness(time));
     }
 
     private void modify() {

@@ -15,7 +15,7 @@ public enum OutputMessage {
         + "Q. 종료\n"),
     TODAY_NOT_OPERATING_HOUR("%s은 등교일이 아닙니다."),
 
-    SHOW_ATTENDANCE_RESULT("%s %s (%s)"),
+    SHOW_ATTENDANCE_RESULT("%s %s %s"),
     MODIFY_SUCCESS("%s %s %s -> %s %s 수정 완료!"),
     RECORD("%s %s %s"),
     SHOW_ATTENDANCE_LIST("이번 달 %s의 출석 기록입니다."),
