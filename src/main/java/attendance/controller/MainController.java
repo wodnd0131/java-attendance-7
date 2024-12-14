@@ -9,11 +9,13 @@ import static attendance.common.validation.InputValidator.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import attendance.common.constant.OutputMessage;
 import attendance.domain.attendance.Attendance;
@@ -86,8 +88,9 @@ public class MainController {
     private void modify() {
         String name = isName(OutputMessage.MODIFY_NAME);
         String day = isDay();
-        LocalTime time = isTime();
         LocalDate target = toLocalDate("2024-12-" + day);
+        LocalTime time = isTime();
+
         List<Attendance> targetAttendanceList = attendances.stream()
             .filter(a -> a.name().equals(name))
             .toList();
@@ -99,7 +102,7 @@ public class MainController {
             String result = String.format(OutputMessage.MODIFY_SUCCESS.getMessage(), dateToString(target)
                 , targetAttendance.get().time().toString()
                 , checkLateness(targetAttendance.get().time())
-                , time.toString()
+                , time
                 , checkLateness(time));
             outputView.println(result);
             return;
@@ -115,10 +118,32 @@ public class MainController {
 
     private void confirmRecord() {
         String name = isName(OutputMessage.WRITE_NAME);
-        attendances.stream()
+
+        List<Attendance> target = attendances.stream()
             .filter(attendance -> attendance.name().equals(name))
             .sorted(Comparator.comparing(Attendance::date))
-            .forEach(t -> System.out.println(t.getRecord()));
+            .collect(Collectors.toList());
+
+        target.forEach(t -> System.out.println(t.getRecord()));
+        Map<String, List<Attendance>> record = target.stream()
+            .collect(Collectors.groupingBy(element -> checkLateness(element.time())));
+        List<Attendance> def = new ArrayList<>();
+        int absence = record.getOrDefault("(결석)", def).size();
+        outputView.println("출석: " + record.getOrDefault("(출석)", def).size() + "회\n"
+            + "지각: " + record.getOrDefault("(지각)", def).size() + "회\n"
+            + "결석: " + absence + "회");
+        if (absence > 5) {
+            outputView.println("제적 대상자입니다.\n");
+            return;
+        }
+        if (absence > 2) {
+            outputView.println("면담 대상자입니다.\n");
+            return;
+        }
+        if (absence > 1) {
+            outputView.println("경고 대상자입니다.\n");
+        }
+
     }
 
     private String isDay() {
