@@ -1,6 +1,7 @@
 package attendance.domain.stock;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-public record Attendance(String name, LocalDateTime datetime) {
+public record Attendance(String name, LocalDate date, LocalTime time) {
 }

@@ -24,7 +24,8 @@ public class AttendanceRepository extends FileRepository<Attendance> {
 
     private Attendance parseAttendance(String line) {
         String[] parts = line.split(",");
-        return new Attendance(parts[0], toLocalDateTimeCSV(parts[1]));
+        String[] dateTime = parts[1].split(" ");
+        return new Attendance(parts[0], toLocalDate(dateTime[0]), toLocalTime(dateTime[1]));
     }
 }
 
