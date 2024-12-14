@@ -22,7 +22,7 @@ public final class InputValidator {
         validateRange(input);
     }
 
-    private static void validateNull(String input) {
+    public static void validateNull(String input) {
         if (input.isBlank()) {
             throw new IllegalArgumentException(INVALID_IS_NULL.getMessage());
         }

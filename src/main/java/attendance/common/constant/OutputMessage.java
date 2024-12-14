@@ -13,7 +13,7 @@ public enum OutputMessage {
         + "3. 크루별 출석 기록 확인\n"
         + "4. 제적 위험자 확인\n"
         + "Q. 종료\n"),
-    TODAY_NOT_OPERATING_HOUR("%d월 %d일 %s요일은 등교일이 아닙니다."),
+    TODAY_NOT_OPERATING_HOUR("%s은 등교일이 아닙니다."),
 
     SHOW_ATTENDANCE("%d월 %d일 %s요일 %d (출석)"),
     MODIFY_SUCCESS("%d월 %d일 %s요일 %s (%s) -> %s (%s) 수정 완료!"),
@@ -27,5 +27,9 @@ public enum OutputMessage {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getMessage(String input) {
+        return String.format(message, input);
     }
 }
