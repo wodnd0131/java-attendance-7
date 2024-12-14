@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import oncall.common.validation.StringValidator;
+import attendance.common.validation.StringValidator;
 
 class StringValidatorTest {
 
@@ -105,38 +105,5 @@ class StringValidatorTest {
         assertTrue(StringValidator.containsSpecialCharacters("test#test"));
         assertTrue(StringValidator.containsSpecialCharacters("test$"));
     }
-
-    @Test
-    void 이메일_형식_검증() {
-        // Given
-        String[] validEmails = {
-            "test@test.com",
-            "user@domain.co.kr",
-            "user.name@domain.com",
-            "user+name@domain.com",
-            "123@domain.com"
-        };
-
-        String[] invalidEmails = {
-            null,
-            "",
-            " ",
-            "test",
-            "@domain.com",
-            "test@",
-            "test@domain",
-            "test.domain.com",
-            "test@domain@com",
-            "test space@domain.com"
-        };
-
-        // When & Then
-        for (String validEmail : validEmails) {
-            assertTrue(StringValidator.isEmailFormat(validEmail));
-        }
-
-        for (String invalidEmail : invalidEmails) {
-            assertFalse(StringValidator.isEmailFormat(invalidEmail));
-        }
-    }
+    
 }

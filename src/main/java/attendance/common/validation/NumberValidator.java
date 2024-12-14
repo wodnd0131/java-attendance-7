@@ -73,6 +73,6 @@ public final class NumberValidator {
         if (str == null || str.trim().isEmpty()) {
             return false;
         }
-        return str.matches("^-?\\d*\\.?\\d+$");
+        return str.matches("^-?[0-9]+(\\.[0-9]+)?$");
     }
 }

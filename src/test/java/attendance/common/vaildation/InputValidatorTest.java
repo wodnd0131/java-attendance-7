@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import oncall.common.constant.ErrorMessages;
-import oncall.common.validation.InputValidator;
+import attendance.common.constant.ErrorMessages;
+import attendance.common.validation.InputValidator;
 
 class InputValidatorTest {
 

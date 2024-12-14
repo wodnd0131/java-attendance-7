@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import oncall.common.validation.DateTimeValidator;
+import attendance.common.validation.DateTimeValidator;
 
 class DateTimeValidatorTest {
 

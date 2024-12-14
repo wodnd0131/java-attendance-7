@@ -82,14 +82,4 @@ public final class StringValidator {
         }
         return str.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
     }
-
-    /**
-     * 문자열이 이메일 형식인지 검사합니다.
-     */
-    public static boolean isEmailFormat(String str) {
-        if (isBlank(str)) {
-            return false;
-        }
-        return str.matches("^[A-Za-z0-9+_.-]+@(.+)$");
-    }
 }
