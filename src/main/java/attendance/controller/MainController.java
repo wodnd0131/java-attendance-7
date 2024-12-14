@@ -61,7 +61,6 @@ public class MainController {
         return Integer.parseInt(input);
     }
 
-    // TODO. 1. 출석 확인
     private void introduceHandler(int input) {
         if (input == 1) {
             attend();
@@ -78,17 +77,17 @@ public class MainController {
     }
 
     private void attend() {
-        isHoliday();
+        isHoliday(today);
         isName(OutputMessage.WRITE_NAME);
         LocalTime time = isTime();
         outputView.println(OutputMessage.SHOW_ATTENDANCE_RESULT, today, time.toString(), "출석");
-        //ToDo. 운영 시간 검증
     }
 
     private void modify() {
         String name = isName(OutputMessage.MODIFY_NAME);
         String day = isDay();
         LocalDate target = toLocalDate("2024-12-" + day);
+        isHoliday(dateToString(target));
         LocalTime time = isTime();
 
         List<Attendance> targetAttendanceList = attendances.stream()
@@ -156,7 +155,7 @@ public class MainController {
         return input;
     }
 
-    private void isHoliday() {
+    private void isHoliday(String today) {
         if (today.contains("토") || today.contains("일요") || today.contains("25")) {
             throw new IllegalArgumentException(
                 ERROR_PREFIX.getMessage() + TODAY_NOT_OPERATING_HOUR.getMessage(today));
