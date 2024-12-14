@@ -30,6 +30,7 @@ public abstract class FileRepository<T> {
         try (BufferedReader reader = createBufferedReader()) {
             List<String> lines = reader.lines()
                 .map(String::trim)
+                .skip(1)
                 .collect(Collectors.toList());
             validateLines(lines);
             return Collections.unmodifiableList(lines);

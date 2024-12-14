@@ -1,9 +1,9 @@
 package attendance.common.config;
 
 import attendance.controller.MainController;
-import attendance.domain.stock.Stock;
+import attendance.domain.stock.Attendance;
+import attendance.repository.AttendanceRepository;
 import attendance.repository.FileRepository;
-import attendance.repository.StockRepository;
 import attendance.view.impl.ConsoleInputView;
 import attendance.view.impl.ConsoleOutputView;
 import attendance.view.interfaces.InputView;
@@ -27,7 +27,7 @@ public final class DependencyConfig {
         return new ConsoleOutputView();
     }
 
-    private FileRepository<Stock> fileRepository() {
-        return new StockRepository();
+    private FileRepository<Attendance> fileRepository() {
+        return new AttendanceRepository();
     }
 }
