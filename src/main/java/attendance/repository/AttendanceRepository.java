@@ -5,7 +5,7 @@ import static attendance.common.util.DateTimesWrapper.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import attendance.domain.stock.Attendance;
+import attendance.domain.attendance.Attendance;
 
 public class AttendanceRepository extends FileRepository<Attendance> {
     private static final String RESOURCE_STOCK_PATH = "/attendances.csv";

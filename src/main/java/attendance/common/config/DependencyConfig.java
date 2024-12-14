@@ -1,7 +1,7 @@
 package attendance.common.config;
 
 import attendance.controller.MainController;
-import attendance.domain.stock.Attendance;
+import attendance.domain.attendance.Attendance;
 import attendance.repository.AttendanceRepository;
 import attendance.repository.FileRepository;
 import attendance.view.impl.ConsoleInputView;

@@ -2,7 +2,6 @@ package attendance.common.validation;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public final class DateTimeValidator {
     private static final String DATE_PATTERN = "\\d{4}-\\d{2}-\\d{2}";
@@ -29,11 +28,11 @@ public final class DateTimeValidator {
         LocalTime lateness = LocalTime.of(10, 4, 59, 0);
         LocalTime absence = LocalTime.of(10, 29, 59, 0);
         if (time.isAfter(startTime) && time.isBefore(lateness)) {
-            return "출석";
+            return "(출석)";
         }
         if (time.isAfter(lateness) && time.isBefore(absence)) {
-            return "지각";
+            return "(지각)";
         }
-        return "결석";
+        return "(결석)";
     }
 }

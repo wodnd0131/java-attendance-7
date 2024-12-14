@@ -7,15 +7,14 @@ import static attendance.common.validation.DateTimeValidator.*;
 import static attendance.common.validation.InputValidator.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import attendance.common.constant.OutputMessage;
-import attendance.domain.stock.Attendance;
+import attendance.domain.attendance.Attendance;
 import attendance.repository.FileRepository;
 import attendance.view.interfaces.InputView;
 import attendance.view.interfaces.OutputView;
@@ -61,7 +60,7 @@ public class MainController {
             modify();
         }
         if (input == 3) {
-            System.out.println(input);
+            confirmRecord();
         }
         if (input == 4) {
             System.out.println(input);
@@ -76,7 +75,7 @@ public class MainController {
         //ToDo. 운영 시간 검증
     }
 
-    private void modify() {
+    private String modify() {
         String name = isName(OutputMessage.MODIFY_NAME);
         String day = isDay();
         LocalTime time = isTime();
@@ -89,15 +88,31 @@ public class MainController {
             .findFirst();
 
         if (targetAttendance.isPresent()) {
-            checkLateness(targetAttendance.get().time());
-            outputView.println(OutputMessage.MODIFY_SUCCESS, dateToString(target)
+            String result = String.format(OutputMessage.MODIFY_SUCCESS.getMessage(), dateToString(target)
                 , targetAttendance.get().time().toString()
                 , checkLateness(targetAttendance.get().time())
                 , time.toString()
-                , checkLateness(time)
-            );
+                , checkLateness(time));
+            outputView.println(result);
+            return result;
         }
+        String result = String.format(OutputMessage.MODIFY_SUCCESS.getMessage(),
+            dateToString(target)
+            , "--:--"
+            , "(결석)"
+            , time.toString()
+            , checkLateness(time));
+        outputView.println(result);
+        return result;
 
+    }
+
+    private void confirmRecord() {
+        String name = isName(OutputMessage.WRITE_NAME);
+        attendances.stream()
+            .filter(attendance -> attendance.name().equals(name))
+            .sorted(Comparator.comparing(Attendance::date))
+            .forEach(t -> System.out.println(t.getRecord()));
     }
 
     private String isDay() {
@@ -138,12 +153,4 @@ public class MainController {
             throw new IllegalArgumentException(INVALID_INPUT_FORMAT.toString());
         }
     }
-    // private <T> T handleReEnter(Supplier<T> inputSupplier) {
-    //     try {
-    //         return inputSupplier.get();
-    //     } catch (IllegalArgumentException | NullPointerException e) {
-    //         outputView.println(e.getMessage());
-    //         return handleReEnter(inputSupplier);
-    //     }
-    // }
 }
